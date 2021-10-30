@@ -1,5 +1,9 @@
 class Api::V1::ItemsController < ApplicationController
 
+  def create
+    render json: Item.create(item_params)
+  end
+
   def update
     render json: Item.update(params[:id], item_params)
   end
