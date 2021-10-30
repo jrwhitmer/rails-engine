@@ -1,6 +1,7 @@
 require 'rails_helper'
 describe 'Items API' do
   it 'can update an existing book' do
+      merchant = Merchant.create(id: 1, name: "Merchant Name")
       id = create(:item).id
       previous_name = Item.last.name
       item_params = { name: "Item Name"}
