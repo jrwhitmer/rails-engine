@@ -8,6 +8,10 @@ class Api::V1::ItemsController < ApplicationController
     render json: Item.update(params[:id], item_params)
   end
 
+  def find
+    render json: Item.find_one_by_name(params[:name])
+  end
+
   private
 
   def item_params

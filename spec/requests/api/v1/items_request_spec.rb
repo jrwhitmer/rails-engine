@@ -16,7 +16,7 @@ describe 'Items API' do
     expect(created_item.merchant_id).to eq(item_params[:merchant_id])
   end
 
-  it 'can update an existing book' do
+  it 'can update an existing item' do
       merchant = Merchant.create(id: 1, name: "Merchant Name")
       id = create(:item).id
       previous_name = Item.last.name
@@ -30,4 +30,19 @@ describe 'Items API' do
       expect(item.name).to_not eq(previous_name)
       expect(item.name).to eq("Item Name")
     end
+
+  it 'can find a single item by name, returns first result (alphabetically)' do
+    merchant = Merchant.create(id: 1, name: "Merchant Name")
+    item_1 = Item.create(name: "zitem", description: "description", unit_price: 1.2, merchant_id: 1)
+    item_2 = Item.create(name: "aitem", description: "description", unit_price: 1.5, merchant_id: 1)
+    item_3 = Item.create(name: "button", description: "description", unit_price: 1.4, merchant_id: 1)
+
+    get "/api/v1/items/find?name=item"
+
+    expect(response).to be_successful
+
+    returned_item = JSON.parse(response.body, symbolize_names: true)
+
+    expect(returned_item[:name]).to eq("aitem")
+  end
 end
