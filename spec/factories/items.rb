@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :customer do
+  factory :item do
     name {Faker::Commerce.product_name}
     description {"Description"}
     unit_price {Faker::Number.decimal(l_digits: 2)}
