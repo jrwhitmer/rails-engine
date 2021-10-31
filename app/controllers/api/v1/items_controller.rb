@@ -10,9 +10,9 @@ class Api::V1::ItemsController < ApplicationController
 
   def find
     if params[:name].present? && params[:min_price].present?
-      #error
+      render json: '{"error": "not_found"}' , status: 404
     elsif params[:name].present? && params[:max_price].present?
-      #error
+      render json: '{"error": "not_found"}' , status: 404
     elsif params[:name].present?
       render json: Item.find_one_by_name(params[:name])
     elsif params[:min_price].present? && params[:max_price].present?

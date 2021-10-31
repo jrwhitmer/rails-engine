@@ -7,6 +7,18 @@ class Item < ApplicationRecord
   has_many :invoice_items
 
   def self.find_one_by_name(name)
-    Item.where('name ILIKE ?', "%#{name}%").order(:name).first
+    where('name ILIKE ?', "%#{name}%").order(:name).first
+  end
+
+  def self.find_one_by_min(min)
+    where("unit_price >= ?", min).order(:name).first
+  end
+
+  def self.find_one_by_max(max)
+    where("unit_price <= ?", max).order(:name).first
+  end
+
+  def self.find_one_by_min_max(min, max)
+    where("unit_price > ? AND unit_price < ?", min, max).order(:name).first
   end
 end
