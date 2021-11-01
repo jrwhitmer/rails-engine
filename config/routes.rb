@@ -5,6 +5,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :items, only: [:create, :update]
       get 'items/find', to: 'items#find'
+      namespace :revenue do
+        resources :merchants, only: :show
+      end
     end
   end
 end
