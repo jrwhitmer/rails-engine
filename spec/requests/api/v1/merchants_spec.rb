@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe "Merchants", type: :request do
-  xit 'can return the total revenue for a merchant' do
+RSpec.describe "Merchants revenue", type: :request do
+  it 'can return the total revenue for a merchant' do
     @merchant = Merchant.create!(name: "Tyler")
     @item = @merchant.items.create!(name: "socks", description: "soft", unit_price: 3.00)
     @customer = Customer.create!(first_name: "Dr.", last_name: "Pepper")
@@ -13,7 +13,7 @@ RSpec.describe "Merchants", type: :request do
 
     @invoice_item1 = @item.invoice_items.create!(quantity: 6, unit_price: 3.0, invoice_id: @invoice1.id)
 
-    get "/api/v1/merchants/#{@merchant.id}"
+    get "/api/v1/revenue/merchants/#{@merchant.id}"
 
     expect(response).to be_successful
 
